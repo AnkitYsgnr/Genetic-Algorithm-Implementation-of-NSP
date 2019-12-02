@@ -2,7 +2,6 @@
 #include <algorithm>
 #include <vector>
 #include <time.h>
-#include <fstream>
 using namespace std;
 
 const int no_of_days = 7;
@@ -196,12 +195,6 @@ bool operator< (const schedule &S1, const schedule &S2) {
 
 int main()
 {
-    ofstream itFile;
-    itFile.open("iteration.txt");
-
-    ofstream fitFile;
-    fitFile.open("fitness.txt");
-
     clock_t t1 = clock();
     
     srand((unsigned)(time(0)));
@@ -270,18 +263,8 @@ int main()
         // }
         cout << "Fitness Value: " << population[0].fitness << endl;
         cout << endl << endl;
-	
-	if (generation%100 == 0) {
-        	itFile << generation << endl;
-                fitFile << population[0].fitness << endl;
-        }
 
         generation++;
-    }
-
-    if ((generation-1)%100 != 0) {
-        itFile << generation-1 << endl;
-        fitFile << population[0].fitness << endl;
     }
 
     cout << "------------------Optimized Schedule--------------------" << endl;
@@ -295,9 +278,6 @@ int main()
     cout << "Optimal Fitness : " << population[0].fitness << endl;
     clock_t t2 = clock();
     cout << "Time Taken : " << (t2-t1)/CLOCKS_PER_SEC << "s" << endl;
-
-    itFile.close();
-    fitFile.close();
 
     return 0;
 }
